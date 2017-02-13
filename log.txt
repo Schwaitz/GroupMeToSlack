@@ -1,0 +1,30 @@
+{
+    "attachments": [],
+    "avatar_url": "https://i.groupme.com/746x750.jpeg.97b411a95e864a7bb27ef5e3777d96c9",
+    "created_at": 1487001215,
+    "group_id": "28891347",
+    "id": "148700121531251942",
+    "name": "Justin Schwaitzberg",
+    "sender_id": "37750207",
+    "sender_type": "user",
+    "source_guid": "024919478b7518430dcff1dbeb444855",
+    "system": false,
+    "text": "Testing something friendos",
+    "user_id": "37750207"
+}
+
+{
+    "attachments": [],
+    "avatar_url": "https://i.groupme.com/746x750.jpeg.97b411a95e864a7bb27ef5e3777d96c9",
+    "created_at": 1487001666,
+    "group_id": "28891347",
+    "id": "148700166624473322",
+    "name": "Justin Schwaitzberg",
+    "sender_id": "37750207",
+    "sender_type": "user",
+    "source_guid": "1220b9b76236315d11645494e5108c1b",
+    "system": false,
+    "text": "Once more",
+    "user_id": "37750207"
+}
+

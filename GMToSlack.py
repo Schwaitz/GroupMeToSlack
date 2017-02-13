@@ -16,7 +16,21 @@ class request_handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
-        message = "<h1>GroupMe -> Slack Web Server is up</h1>"
+        message = "<h1>GroupMe -> Slack Web Server is up</h1><br><h2>Log</h2><br><ul style='list-style-type: none; padding:0; margin:0;'>"
+
+        # Get array from log
+        file = open("/home/ubuntu/GMTS/log.txt", "r")
+        log = file.readlines()
+        file.close()
+
+        # Write lines from log.txt to message
+        for l in log:
+            message += "<li>" + l + "</li>"
+
+        message += "</ul>"
+
+
+
         self.wfile.write(bytes(message, "utf8"))
         return
 
@@ -32,6 +46,11 @@ class request_handler(BaseHTTPRequestHandler):
         # Print it to console
         print(json.dumps(data, sort_keys=True, indent=4))
 
+        # Write it to log
+        file = open("/home/ubuntu/GMTS/log.txt", "a")
+        file.writelines(json.dumps(data, sort_keys=True, indent=4))
+        file.write('\n\n')
+
         # Make sure the sender is not a bot
         if data["sender_type"] != "bot":
 
@@ -40,7 +59,13 @@ class request_handler(BaseHTTPRequestHandler):
             channel = "#test"
             username = data["name"]
             text = data["text"]
-            iw_url = "<insert URL here>"
+
+
+            # Get secret url without publicly posting to GitHub
+            file = open("/home/ubuntu/GMTS/url.txt")
+            iw_url = file.read()
+            file.close()
+
 
             # Optional JSON parameter of "icon_emoji": ":ghost:"
 
