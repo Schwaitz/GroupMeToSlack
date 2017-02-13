@@ -60,6 +60,11 @@ class request_handler(BaseHTTPRequestHandler):
             text = data["text"]
             avatar = data["avatar_url"]
 
+            if username is "GroupMe":
+                avatar = "http://i.imgur.com/8xeeQ2A.png"
+            if avatar is "null":
+                avatar = "http://i.imgur.com/8xeeQ2A.png"
+
 
             # Get secret url without publicly posting to GitHub
             file = open("/home/ubuntu/GMTS/url.txt")
@@ -67,7 +72,6 @@ class request_handler(BaseHTTPRequestHandler):
             file.close()
 
 
-            # Optional JSON parameter of "icon_emoji": ":ghost:"
 
 
             # Build the message to send
