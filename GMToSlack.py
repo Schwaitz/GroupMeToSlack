@@ -58,6 +58,7 @@ class request_handler(BaseHTTPRequestHandler):
             channel = "#test"
             username = data["name"]
             text = data["text"]
+            avatar = data["avatar_url"]
 
 
             # Get secret url without publicly posting to GitHub
@@ -73,7 +74,8 @@ class request_handler(BaseHTTPRequestHandler):
             message= {
                 "channel": channel,
                 "username": username,
-                "text": text
+                "text": text,
+                "icon_url" : avatar
                       }
 
 
