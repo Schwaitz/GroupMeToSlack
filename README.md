@@ -11,3 +11,18 @@ Get GroupMe data, send to Slack
   * Pretty easy to do
 * Potentially scrape data for profile pictures
   * Not feeling confident on this
+  
+  
+  
+### Setup
+
+* Make sure you are running Python 3.x
+  * You can use python --version to check
+  * Sometimes installations require "python3"
+* Install requirements with pip
+  * *pip install -r requirements.txt*
+  * Similar to above, sometimes you need to use pip3
+* Command line usage:
+  * python GMToSlack.py \<port\>
+  * The port should be the one that your callback url on GroupMe is set to
+    * It is the port that your WebServer is served on
