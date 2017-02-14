@@ -6,10 +6,11 @@ import requests
 import sys
 
 
-class request_handler(BaseHTTPRequestHandler):
 
+class request_handler(BaseHTTPRequestHandler):
     # GET request handler
     # What to do when someone accesses it in a browser
+    log_path = "log.txt"
     def do_GET(self):
 
         self.send_response(200)
@@ -18,7 +19,7 @@ class request_handler(BaseHTTPRequestHandler):
         message = "<h1>GroupMe -> Slack Web Server is up</h1><br><h2>Log</h2><br><ul style='list-style-type: none; padding:0; margin:0;'>"
 
         # Get array from log
-        file = open("/home/ubuntu/GMTS/log.txt", "r")
+        file = open(self.log_path, "r")
         log = file.readlines()
         file.close()
 
@@ -46,7 +47,7 @@ class request_handler(BaseHTTPRequestHandler):
         print(json.dumps(data, sort_keys=True, indent=4))
 
         # Write it to log
-        file = open("/home/ubuntu/GMTS/log.txt", "a")
+        file = open(self.log_path, "a")
         file.writelines(json.dumps(data, sort_keys=True, indent=4))
         file.write('\n\n')
 
@@ -67,7 +68,7 @@ class request_handler(BaseHTTPRequestHandler):
 
 
             # Get secret url without publicly posting to GitHub
-            file = open("/home/ubuntu/GMTS/url.txt")
+            file = open(self.log_path)
             iw_url = file.read()
             file.close()
 
@@ -93,11 +94,22 @@ class request_handler(BaseHTTPRequestHandler):
 def run():
 
     # Use the [1] argument for what port to listen on
-    port = int(sys.argv[1])
-    server_address = ('0.0.0.0', port)
+    port = "8080"
+    try:
+        port = sys.argv[1]
+    except IndexError:
+        print("using default port, " + port)
+
+    server_address = ('0.0.0.0',int(port))
     httpd = HTTPServer(server_address, request_handler)
     print('running server on port {}...'.format(port))
     httpd.serve_forever()
 
+def init():
+    print(sys.argv)
 
-run()
+
+
+if __name__ == '__main__':
+    init()
+    run()
