@@ -105,11 +105,5 @@ def run():
     print('running server on port {}...'.format(port))
     httpd.serve_forever()
 
-def init():
-    print(sys.argv)
-
-
-
 if __name__ == '__main__':
-    init()
     run()
