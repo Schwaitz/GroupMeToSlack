@@ -10,26 +10,12 @@ import sys
 class request_handler(BaseHTTPRequestHandler):
     # GET request handler
     # What to do when someone accesses it in a browser
-    log_path = "log.txt"
     def do_GET(self):
 
         self.send_response(200)
         self.send_header('Content-type', 'text/html')
         self.end_headers()
-        message = "<h1>GroupMe -> Slack Web Server is up</h1><br><h2>Log</h2><br><ul style='list-style-type: none; padding:0; margin:0;'>"
-
-        # Get array from log
-        file = open(self.log_path, "r")
-        log = file.readlines()
-        file.close()
-
-        # Write lines from log.txt to message
-        for l in log:
-            message += "<li>" + l + "</li>"
-
-        message += "</ul>"
-
-
+        message = "<h1>GroupMe -> Slack Web Server is up</h1>"
 
         self.wfile.write(bytes(message, "utf8"))
         return
@@ -38,6 +24,7 @@ class request_handler(BaseHTTPRequestHandler):
     # What to do when the webserver receives POST data
     def do_POST(self):
 
+        log_path = "gm_log.txt"
         # Handle and format the data
         self.data_string = self.rfile.read(int(self.headers['Content-Length']))
         jsonstring = str(self.data_string, "utf-8").strip()
@@ -53,7 +40,6 @@ class request_handler(BaseHTTPRequestHandler):
 
         # Make sure the sender is not a bot
         if data["sender_type"] != "bot":
-
 
             # Easily changeable info
             channel = "#test"
@@ -76,7 +62,7 @@ class request_handler(BaseHTTPRequestHandler):
 
 
             # Build the message to send
-            message= {
+            message = {
                 "channel": channel,
                 "username": username,
                 "text": text,

@@ -9,8 +9,8 @@ Get GroupMe data, send to Slack
 * Handle links / attachments
   * Slack has particular JSON parameters for links
   * Pretty easy to do
-* Potentially scrape data for profile pictures
-  * Not feeling confident on this
+* ~~Potentially scrape data for profile pictures~~
+  * ~~Not feeling confident on this~~
   
   
   
